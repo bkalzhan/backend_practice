@@ -1,9 +1,9 @@
 package com.example.demo.controller;
 
+import com.example.demo.dto.UserDto;
 import com.example.demo.model.User;
 import com.example.demo.service.UserService;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -20,5 +20,14 @@ public class UserController {
         return userService.getUsers();
     }
 
+    @GetMapping("/users/{userId}")
+    public User getUser(@PathVariable int userId) {
+        return userService.getUser(userId);
+    }
+
+    @PostMapping("/users")
+    public User save(@RequestBody UserDto userDto) {
+        return userService.save(userDto.id, userDto.nickname, userDto.email, userDto.password);
+    }
 
 }

@@ -1,6 +1,7 @@
 package com.example.demo.service;
 
 import com.example.demo.model.User;
+import com.example.demo.repository.UserRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -8,21 +9,22 @@ import java.util.List;
 
 @Service
 public class UserService {
+    private UserRepository userRepository;
+
+    public UserService(UserRepository userRepository) {
+        this.userRepository = userRepository;
+    }
+
     public List<User> getUsers(){
-        User user1 = new User(1, "bkalzhan", "bekzat@gmail.com", "123456");
-        User user2 = new User(2, "bkalzhan", "bekzat@gmail.com", "123456");
-        User user3 = new User(3, "bkalzhan", "bekzat@gmail.com", "123456");
-        User user4 = new User(4, "bkalzhan", "bekzat@gmail.com", "123456");
-        User user5 = new User(5, "bkalzhan", "bekzat@gmail.com", "123456");
+        return userRepository.findAll();
+    }
 
-        List<User> users = new ArrayList<>();
+    public User getUser(int id){
+        return userRepository.findById(id);
+    }
 
-        users.add(user1);
-        users.add(user2);
-        users.add(user3);
-        users.add(user4);
-        users.add(user5);
-
-        return users;
+    public User save(int id, String nickname, String email, String password){
+        User user = new User(id, nickname, email, password);
+        return userRepository.save(user);
     }
 }

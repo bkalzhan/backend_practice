@@ -1,6 +1,14 @@
 package com.example.demo.model;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
+@Entity
+@Table(name = "users")
 public class User {
+    @Id
     private int id;
     private String nickname;
     private String email;
@@ -11,6 +19,10 @@ public class User {
         this.nickname = nickname;
         this.email = email;
         this.password = password;
+    }
+
+    public User() {
+
     }
 
     public int getId() {

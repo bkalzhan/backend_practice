@@ -30,4 +30,14 @@ public class UserController {
         return userService.save(userDto.id, userDto.nickname, userDto.email, userDto.password);
     }
 
+    @PutMapping("/users/{userId}")
+    public User update(@PathVariable int userId, @RequestBody UserDto userDto){
+        return userService.update(userId, userDto);
+    }
+
+    @DeleteMapping("/users/{userId}")
+    public boolean update(@PathVariable int userId){
+        return userService.delete(userId);
+    }
+
 }
